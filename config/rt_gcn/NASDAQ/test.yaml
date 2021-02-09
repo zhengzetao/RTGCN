@@ -1,0 +1,27 @@
+# weights: ./models/st_gcn.ntu-xsub.pt
+weights: ./work_dir/RT_GCN/NASDAQ/best_model30.pt
+
+# feeder
+feeder: feeder.feeder.Feeder
+test_feeder_args:
+  data_path: ./data/NASDAQ/test_15_EOD.npy
+  price_path: ./data/NASDAQ/test_15_price.npy
+  label_path: ./data/NASDAQ/test_15_label.pkl
+
+# model
+model: net.rt_gcn.Model
+model_args:
+  in_channels: 4
+  dropout: 0.5
+  # edge_importance_weighting: True
+  edge_importance_weighting: 'Uniform'
+  graph_args:
+    market: 'NASDAQ'
+    relation_path: ./data/NASDAQ/NASDAQ_relation.npy
+    strategy: 'uniform'
+
+# test 
+phase: test
+device: [0,1]
+test_batch_size: 64
+

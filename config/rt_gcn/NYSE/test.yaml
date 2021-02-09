@@ -1,0 +1,25 @@
+weights: ./work_dir/RT_GCN/NYSE/weight_best_model.pt
+
+# feeder
+feeder: feeder.feeder.Feeder
+test_feeder_args:
+  data_path: ./data/NYSE/test_15_EOD.npy
+  price_path: ./data/NYSE/test_15_price.npy
+  label_path: ./data/NYSE/test_15_label.pkl
+
+# model
+model: net.rt_gcn.Model
+model_args:
+  in_channels: 4
+  dropout: 0.5
+  # edge_importance_weighting: True
+  edge_importance_weighting: 'Weight'
+  graph_args:
+    market: 'NYSE'
+    relation_path: ./data/NYSE/NYSE_relation.npy
+    strategy: 'uniform'
+
+# test 
+phase: test
+device: [0,1]
+test_batch_size: 64

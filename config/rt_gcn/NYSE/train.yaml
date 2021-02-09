@@ -1,0 +1,38 @@
+# work_dir: ./work_dir/recognition/ntu-xsub/ST_GCN
+work_dir: ./work_dir/RT_GCN/NYSE
+
+# feeder
+feeder: feeder.feeder.Feeder
+train_feeder_args:
+  data_path: ./data/NYSE/train_15_EOD.npy
+  price_path: ./data/NYSE/train_15_price.npy
+  label_path: ./data/NYSE/train_15_label.pkl
+  debug: False
+test_feeder_args:
+  data_path: ./data/NYSE/test_15_EOD.npy
+  price_path: ./data/NYSE/test_15_price.npy
+  label_path: ./data/NYSE/test_15_label.pkl
+
+# model
+model: net.rt_gcn.Model
+model_args:
+  in_channels: 4
+  dropout: 0.5
+  edge_importance_weighting: 'Time-aware'
+  graph_args:
+    market: 'NYSE'
+    relation_path: ./data/NASDAQ/NASDAQ_relation.npy
+    strategy: 'uniform'
+
+#optim
+weight_decay: 0.1
+base_lr: 0.1
+step: [5, 25]
+
+# training
+device: [1,4]
+batch_size: 32
+test_batch_size: 64
+num_epoch: 100
+
+
