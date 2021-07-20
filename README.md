@@ -7,7 +7,7 @@ Place the data on the path: RTGCN/data/
 
 Place the pretained model on the path: RTGCN/work_dir/NASDAQ(OR NYSE)
 
-Tesing pretained model on NASDAQ 
+Tesing pretained model on NASDAQ. Edit the "weights" and "relation_path" variables to reload the other models weights.
 --------
     python main.py recognition -c config/rt_gcn/NASDAQ/test.yaml
 Testing pretained model on NYSE
